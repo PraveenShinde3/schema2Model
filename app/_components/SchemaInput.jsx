@@ -9,9 +9,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import generateModelsService from "../service/generateModels.service.js";
 
-const SchemaInput = () => {
+const SchemaInput = ({ generateModels }) => {
   const selectlanguages = [
     "JavaScript",
     "TypeScript",
@@ -31,7 +30,11 @@ const SchemaInput = () => {
 
   const onSubmit = () => {
     try {
-      generateModelsService.getModels(schema, language);
+      if (schema) {
+        generateModels(schema, language);
+      } else {
+        alert("Please enter a SQL schema");
+      }
     } catch (e) {
       console.error("Error generating models:", e);
     }
@@ -39,7 +42,7 @@ const SchemaInput = () => {
 
   return (
     <div className="w-full bg-[#F7F7F7] p-1 rounded-2xl">
-      <div className=" bg-white rounded-lg h-36 overflow-hidden p-2 gap-2 flex flex-col justify-between">
+      <div className=" bg-white rounded-xl h-36 overflow-hidden p-2 gap-2 flex flex-col justify-between">
         <textarea
           type="text"
           placeholder="SQL Schema here..."

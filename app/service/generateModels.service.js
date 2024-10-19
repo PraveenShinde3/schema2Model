@@ -20,7 +20,7 @@ class generateModelsService {
         const model = response.data.models[modelKey];
         return {
           modelName: modelKey,
-          Code: model[language], // Filter JavaScript code for each model
+          code: model[language], // Filter JavaScript code for each model
         };
       });
       console.log(jsCode);
