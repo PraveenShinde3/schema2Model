@@ -1,9 +1,19 @@
+"use client";
+import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const OutputCode = ({ data }) => {
+  const [activeTab, setActiveTab] = useState("output");
+
+  useEffect(() => {
+    if (data && data.length > 0) {
+      setActiveTab(data[0].modelName);
+    }
+  }, [data]);
+
   return (
     <div className="py-4 w-full">
-      <Tabs defaultValue={data ? data[0].modelName : "output"}>
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList>
           {data ? (
             data.map((model) => (
@@ -12,7 +22,7 @@ const OutputCode = ({ data }) => {
               </TabsTrigger>
             ))
           ) : (
-            <TabsTrigger value="output">Ouput</TabsTrigger>
+            <TabsTrigger value="output">Output</TabsTrigger>
           )}
         </TabsList>
         {data ? (
