@@ -14,15 +14,24 @@ const OutputCode = ({ data }) => {
   return (
     <div className="py-4 w-full">
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList>
+        <TabsList className="py-0.5 block whitespace-nowrap w-fit overflow-x-auto rounded-md max-w-full">
           {data ? (
             data.map((model) => (
-              <TabsTrigger value={model.modelName} key={model.modelName}>
+              <TabsTrigger
+                value={model.modelName}
+                key={model.modelName}
+                className="text-[0.8rem] rounded-none shadow-none data-[state=active]:underline data-[state=active]:bg-transparent underline-offset-4"
+              >
                 {model.modelName}
               </TabsTrigger>
             ))
           ) : (
-            <TabsTrigger value="output">Output</TabsTrigger>
+            <TabsTrigger
+              value="output"
+              className="rounded-none shadow-none data-[state=active]:underline underline-offset-4"
+            >
+              Output
+            </TabsTrigger>
           )}
         </TabsList>
         {data ? (
